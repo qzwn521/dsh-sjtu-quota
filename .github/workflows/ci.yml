@@ -1,0 +1,44 @@
+name: Test plugin
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [22, 24]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --test test/*.test.js
+      - run: node scripts/check-release.mjs --draft
+      - run: node scripts/pack.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-${{ matrix.os }}-node${{ matrix.node }}
+          path: dist/*
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/check-release.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-ubuntu-latest-node24
+          path: dist
+      - name: Publish beta assets after every test platform passes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/*.tgz dist/SHA256SUMS.txt --verify-tag --prerelease --title "$GITHUB_REF_NAME" --notes-file release/NOTES.md

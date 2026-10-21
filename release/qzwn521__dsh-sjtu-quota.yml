@@ -1,0 +1,6 @@
+url: https://github.com/qzwn521/dsh-sjtu-quota
+name: qzwn521/dsh-sjtu-quota
+category: usage
+description:
+  en: 'Paces SJTU API requests against token and request budgets, records local usage, and resumes agent steps after transient rate limits.'
+  zh: '按上交 API 的 Token 和请求数预算排队，统计本地用量，并在临时限流后恢复模型步骤。'
