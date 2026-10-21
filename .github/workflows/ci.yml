@@ -41,4 +41,10 @@ jobs:
       - name: Publish beta assets after every test platform passes
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/*.tgz dist/SHA256SUMS.txt --verify-tag --prerelease --title "$GITHUB_REF_NAME" --notes-file release/NOTES.md
+        run: |
+          if gh release view "$GITHUB_REF_NAME" --json assets > existing-release.json 2>/dev/null; then
+            node --input-type=module -e 'import fs from "node:fs"; const names = JSON.parse(fs.readFileSync("existing-release.json", "utf8")).assets.map(asset => asset.name); for (const name of fs.readdirSync("dist")) if (!names.includes(name)) throw new Error("Existing release is missing " + name);'
+            echo "Release already exists with all expected assets; leaving it unchanged."
+          else
+            gh release create "$GITHUB_REF_NAME" dist/*.tgz dist/SHA256SUMS.txt --verify-tag --prerelease --title "$GITHUB_REF_NAME" --notes-file release/NOTES.md
+          fi

@@ -26,7 +26,7 @@ No network calls of its own, no stored keys or conversation text. See [SECURITY.
 
 ## Validation
 
-Native interfaces were tested on Harness 0.1.5-rc.2 and 0.2.0-rc.2 with real host modules and a mocked provider. All 23 Windows/Node 24 automated tests passed, including package reproducibility and exclusion of private data. Real CLI installation, config composition and removal passed in an isolated DSH_HOME. A fixed-input SJTU Qwen API smoke test returned content and usage (22 total tokens); no deliberate online rate-limit load was generated. Long-task production acceptance remains pending. Cross-platform CI is configured but has not run on GitHub.
+Native interfaces were tested on Harness 0.1.5-rc.2 and 0.2.0-rc.2 with real host modules and a mocked provider. All 23 Windows/Node 24 automated tests passed, including package reproducibility and exclusion of private data. Real CLI installation, config composition and removal passed in an isolated DSH_HOME. A fixed-input SJTU Qwen API smoke test returned content and usage (22 total tokens); no deliberate online rate-limit load was generated. Long-task production acceptance remains pending. Cross-platform CI passed all six OS/Node combinations on GitHub, and the beta release job succeeded.
 
 ```sh
 npm test

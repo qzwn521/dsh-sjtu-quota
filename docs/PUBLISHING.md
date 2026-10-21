@@ -17,7 +17,13 @@ node scripts/verify-install.mjs /path/to/dsh/resources/app
 
 可选真实 API 冒烟测试为 `node scripts/verify-sjtu-api.mjs`，仅从环境变量 `SJTU_API_KEY` 读取密钥，发送一个固定的短生成请求，不保存密钥或原始错误正文。此测试脚本不会放入插件安装包，实际插件不自行联网。
 
-GitHub CI 配置了 Windows/macOS/Linux × Node 22/24；推送后才会实际运行，不能把“配置了 CI”当成“所有平台已验证”。
+GitHub CI 已通过 Windows/macOS/Linux × Node 22/24 六组测试。Beta 标签的发布任务在测试全部通过后生成了安装包和校验文件；重复运行会先核对已有资产，不重复创建同一版本。
+
+公开仓库：https://github.com/qzwn521/dsh-sjtu-quota
+
+首个测试版：https://github.com/qzwn521/dsh-sjtu-quota/releases/tag/v0.1.1-beta.1
+
+市场一日期限：北京时间 2026-10-22 20:33:28 之后满足仓库创建满一天要求。发布源码和安装包不等于已经被市场收录。
 
 ## 仓库身份
 

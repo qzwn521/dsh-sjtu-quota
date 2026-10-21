@@ -19,5 +19,6 @@ for (const name of ['README.md', 'README.en.md']) {
 mkdirSync(join(root, 'release'), { recursive: true })
 const submission = `url: https://github.com/${repository}\nname: ${repository}\ncategory: usage\ndescription:\n  en: 'Paces SJTU API requests against token and request budgets, records local usage, and resumes agent steps after transient rate limits.'\n  zh: '按上交 API 的 Token 和请求数预算排队，统计本地用量，并在临时限流后恢复模型步骤。'\n`
 const filename = `${owner}__${repo}.yml`
-writeFileSync(join(root, 'release', filename), submission)
+const tarball = `https://github.com/${repository}/releases/download/v${pkg.version}/${pkg.name}-${pkg.version}.tgz`
+writeFileSync(join(root, 'release', filename), submission + `tarball: ${tarball}\n`)
 console.log(JSON.stringify({ repository, submissionFile: `release/${filename}`, published: false }))

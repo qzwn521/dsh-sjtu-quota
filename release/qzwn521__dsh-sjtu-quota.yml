@@ -4,3 +4,4 @@ category: usage
 description:
   en: 'Paces SJTU API requests against token and request budgets, records local usage, and resumes agent steps after transient rate limits.'
   zh: '按上交 API 的 Token 和请求数预算排队，统计本地用量，并在临时限流后恢复模型步骤。'
+tarball: https://github.com/qzwn521/dsh-sjtu-quota/releases/download/v0.1.1-beta.1/dsh-sjtu-quota-0.1.1-beta.1.tgz

@@ -73,7 +73,7 @@ dsh plugin --profile web remove dsh-sjtu-quota
 - Windows/Node 24 的 23 项自动测试已通过，包括发布包可复现、排除密钥与测试数据、缺少仓库身份时阻止发布。
 - 已使用两个版本的真实 Cordis、LLM、Settings 和重试事件校验模块进行隔离验证，模型服务使用模拟适配器。
 - 覆盖连续六次 429 后成功、插件加载/卸载、旧设置与新版 Config 表单更新。
-- GitHub CI 已配置三种系统、Node 22/24，推送后才会实际运行。
+- GitHub CI 已通过 Windows/macOS/Linux × Node 22/24 六组测试；Beta 发布任务也已通过。
 - 已在独立 DSH_HOME 中通过真实 CLI 安装、配置合成与卸载验证，不修改已有用户配置。
 - 真实上交 API 冒烟测试已通过：Qwen 单次固定测试输入共 22 Token，返回正文和用量。未主动制造线上 429；长期真实训练任务中的稳定性仍需 Beta 验收。
 
